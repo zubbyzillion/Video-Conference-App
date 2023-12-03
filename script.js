@@ -1,7 +1,7 @@
 let client = AgoraRTC.createClient(
     {
-        mode: "rtc",
-        'codec':"vp8"
+        mode:"rtc",
+        codec:"vp8"
     }
 )
 
@@ -26,7 +26,7 @@ document.getElementById("join-btn").addEventListener("click", async ()=> {
 
 let joinStreams = async () => {
 
-    [config.uid, localTracks.audioTracks, localTracks] = await Promise.all([
+    [config.uid, localTracks.audioTracks, localTracks.videoTracks] = await Promise.all([
         client.join(config.appid, config.channel, config.token),
         AgoraRTC.createMicrophoneAudioTrack(),
         AgoraRTC.createCameraVideoTrack(),
@@ -37,8 +37,12 @@ let joinStreams = async () => {
         <div class="video-player player" id="stream-${config.uid}" ></div>
     </div>`
 
-    document.getElementById('user-streams').insertAdjacentElement('beforeend', videoPlayer)
+    document.getElementById('user-streams').insertAdjacentHTML('beforeend', videoPlayer)
     localTracks.videoTracks.play(`stream-${config.uid}`)
 
     await client.publish([localTracks.audioTracks, localTracks.videoTracks])
+}
+
+let handleUserJoin = async (use, mediaType) => {
+    console.log("user has joined our stream")
 }
