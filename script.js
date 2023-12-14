@@ -17,6 +17,11 @@ let localTracks = {
     videoTrack:null,
 }
 
+let localTrackState = {
+    audioTrackMuted: false,
+    videoTrackMuted: false,
+}
+
 let remoteTracks = {}
 
 document.getElementById("join-btn").addEventListener("click", async ()=> {
@@ -24,7 +29,31 @@ document.getElementById("join-btn").addEventListener("click", async ()=> {
     await joinStreams()
 })
 
-document.getElementById('leave-btn', )
+document.getElementById("mic-btn").addEventListener("click", async () => {
+    if(!localTrackState.audioTrackMuted){
+        await localTracks.audioTrack.setMuted(true)
+        localTrackState.audioTrackMuted = true
+    }else{
+        await localTracks.audioTrack.setMuted(false)
+        localTrackState.audioTrackMuted = false
+    }
+})
+
+document.getElementById('leave-btn').addEventListener("click", async() => {
+    for(trackName in localTracks){
+        let track = localTracks[trackName]
+        if(track){
+            //Stops camera and mic
+            track.stop()
+            //Disconnects from your camera and mic
+            track.close()
+            localTracks[trackName] = null
+        }
+    }
+
+    await client.leave()
+    document.getElementById('user-streams').innerHTML = ""
+})
 
 let joinStreams = async () => {
 
