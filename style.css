@@ -12,16 +12,27 @@ main {
     height: 75vh;
 }
 
-.user-streams {
+#user-streams {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
     gap: 1em;
     height: 100%;
 }
 
+/* .video-container {
+    height: 100%;
+    width: 100%;
+} */
+
 .video-player {
-    height: 400px;
+    height: 100%;
     width: 100%;
     border-radius: 10px;
     overflow: hidden;
+}
+
+@media screen and (max-width:1400px) {
+    main {
+        width: 95%;
+    }
 }

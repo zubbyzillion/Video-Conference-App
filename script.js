@@ -7,7 +7,7 @@ let client = AgoraRTC.createClient(
 
 let config = {
     appid: "264655385f5c48549bae0190c6b6bc2b",
-    token: "007eJxTYMgtvyV34bnGfbVXok0TD+9Zf76oVuxofajBrqjFRl8XP2BQYDAyMzEzNTW2ME0zTTaxMDWxTEpMNTC0NEg2SzJLSjZKMistSG0IZGSQdXRlZWSAQBCfm6EqMycnMz9PITMvmYEBAHEdIdk=",
+    token: "007eJxTYFg2n++683SGs2snznX7N1Wi2FPsdD+Lm6bitlWv3f/e+CygwGBkZmJmampsYZpmmmxiYWpimZSYamBoaZBslmSWlGyUNFGnOrUhkJFh2sV5jIwMEAjiczNUZebkZObnKWTmJTMwAAAmlyId",
     uid: null,
     channel: "zillion inc",
 }
@@ -23,6 +23,8 @@ document.getElementById("join-btn").addEventListener("click", async ()=> {
     console.log("User Joined stream")
     await joinStreams()
 })
+
+document.getElementById('leave-btn', )
 
 let joinStreams = async () => {
 
@@ -46,8 +48,10 @@ let joinStreams = async () => {
     client.on("user-published", handleUserJoined)
 }
 
-let handleUserLeft = async () => {
+let handleUserLeft = async (user) => {
     console.log("User has left")
+    delete remoteTracks[user.uid]
+    document.getElementById(`video-wrappere-${user.uid}`)
 }
 
 let handleUserJoined = async (user, mediaType) => {
