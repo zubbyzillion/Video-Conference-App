@@ -7,7 +7,7 @@ let client = AgoraRTC.createClient(
 
 let config = {
     appid: "264655385f5c48549bae0190c6b6bc2b",
-    token: "007eJxTYFg2n++683SGs2snznX7N1Wi2FPsdD+Lm6bitlWv3f/e+CygwGBkZmJmampsYZpmmmxiYWpimZSYamBoaZBslmSWlGyUNFGnOrUhkJFh2sV5jIwMEAjiczNUZebkZObnKWTmJTMwAAAmlyId",
+    token: "007eJxTYCgp/MqzgbtTZ0rlijMi6zf3GhxhuzJ3/ttveT1f6k/zpocpMBiZmZiZmhpbmKaZJptYmJpYJiWmGhhaGiSbJZklJRsl3ZpYk9oQyMjQGfOKiZEBAkF8boaqzJyczPw8hcy8ZAYGAJDsI5k=",
     uid: null,
     channel: "zillion inc",
 }
@@ -39,7 +39,17 @@ document.getElementById("mic-btn").addEventListener("click", async () => {
     }
 })
 
-document.getElementById('leave-btn').addEventListener("click", async() => {
+// document.getElementById("camera-btn").addEventListener("click", async () => {
+//     if(!localTrackState.videoTrackMuted){
+//         await localTracks.videoTrack.setMuted(true)
+//         localTrackState.videoTrackMuted = true
+//     }else{
+//         await localTracks.videoTrack.setMuted(false)
+//         localTrackState.videoTrackMuted = false
+//     }
+// })
+
+document.getElementById('leave-btn').addEventListener("click", async () => {
     for(trackName in localTracks){
         let track = localTracks[trackName]
         if(track){
